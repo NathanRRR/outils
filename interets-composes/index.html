@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Intérêts composés &mdash; Outils</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">Outils</a>
+      <span class="navbar-text text-light-emphasis">Intérêts composés</span>
+    </div>
+  </nav>
+
+  <main class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-7">
+        <h1 class="mb-4">Calculateur d'intérêts composés</h1>
+
+        <form id="compound-form" class="row g-3" novalidate>
+          <div class="col-sm-6">
+            <label for="principal" class="form-label">Capital initial (&euro;)</label>
+            <input type="number" class="form-control" id="principal" min="0" step="0.01" value="10000" required>
+          </div>
+          <div class="col-sm-6">
+            <label for="contribution" class="form-label">Versement mensuel (&euro;)</label>
+            <input type="number" class="form-control" id="contribution" min="0" step="0.01" value="100">
+          </div>
+          <div class="col-sm-6">
+            <label for="rate" class="form-label">Taux annuel (%)</label>
+            <input type="number" class="form-control" id="rate" min="0" step="0.01" value="5" required>
+          </div>
+          <div class="col-sm-6">
+            <label for="years" class="form-label">Durée (années)</label>
+            <input type="number" class="form-control" id="years" min="1" step="1" value="10" required>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">Calculer</button>
+          </div>
+        </form>
+
+        <div id="result" class="result-box p-4 mt-4 d-none">
+          <div class="row text-center">
+            <div class="col-md-4 mb-3 mb-md-0">
+              <div class="text-body-secondary small">Montant final</div>
+              <div class="fs-4 fw-semibold" id="final-amount">&mdash;</div>
+            </div>
+            <div class="col-md-4 mb-3 mb-md-0">
+              <div class="text-body-secondary small">Total versé</div>
+              <div class="fs-4 fw-semibold" id="total-contributed">&mdash;</div>
+            </div>
+            <div class="col-md-4">
+              <div class="text-body-secondary small">Intérêts gagnés</div>
+              <div class="fs-4 fw-semibold" id="total-interest">&mdash;</div>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-body-secondary small mt-4">
+          Calcul basé sur une capitalisation mensuelle et des versements effectués en fin de mois.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-dark text-light-emphasis py-3 mt-auto">
+    <div class="container text-center small">
+      &copy; <span id="year"></span> Outils
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

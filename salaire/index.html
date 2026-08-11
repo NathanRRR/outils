@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Salaire brut / net &mdash; Outils</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">Outils</a>
+      <span class="navbar-text text-light-emphasis">Salaire brut / net</span>
+    </div>
+  </nav>
+
+  <main class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-7">
+        <h1 class="mb-4">Convertisseur salaire brut / net</h1>
+
+        <form id="salary-form" class="row g-3" novalidate>
+          <div class="col-12">
+            <label class="form-label d-block">Sens de la conversion</label>
+            <div class="btn-group w-100" role="group">
+              <input type="radio" class="btn-check" name="direction" id="dir-brut-net" value="brut-to-net" checked>
+              <label class="btn btn-outline-primary" for="dir-brut-net">Brut &rarr; Net</label>
+
+              <input type="radio" class="btn-check" name="direction" id="dir-net-brut" value="net-to-brut">
+              <label class="btn btn-outline-primary" for="dir-net-brut">Net &rarr; Brut</label>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <label for="amount" class="form-label">Montant (&euro;)</label>
+            <input type="number" class="form-control" id="amount" min="0" step="0.01" value="2500" required>
+          </div>
+
+          <div class="col-sm-6">
+            <label for="period" class="form-label">Période</label>
+            <select class="form-select" id="period">
+              <option value="month" selected>Mensuel</option>
+              <option value="year">Annuel</option>
+            </select>
+          </div>
+
+          <div class="col-12">
+            <label for="status" class="form-label">Statut</label>
+            <select class="form-select" id="status">
+              <option value="0.78" selected>Non-cadre (secteur privé)</option>
+              <option value="0.75">Cadre (secteur privé)</option>
+              <option value="0.85">Fonction publique</option>
+            </select>
+          </div>
+
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">Calculer</button>
+          </div>
+        </form>
+
+        <div id="result" class="result-box p-4 mt-4 d-none">
+          <div class="row text-center">
+            <div class="col-6">
+              <div class="text-body-secondary small" id="result-label">Salaire net</div>
+              <div class="fs-3 fw-semibold" id="result-month">&mdash;</div>
+              <div class="text-body-secondary small">par mois</div>
+            </div>
+            <div class="col-6">
+              <div class="text-body-secondary small" id="result-label-year">Salaire net</div>
+              <div class="fs-3 fw-semibold" id="result-year">&mdash;</div>
+              <div class="text-body-secondary small">par an</div>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-body-secondary small mt-4">
+          Estimation approximative à titre indicatif. Le taux de charges réel dépend de la convention collective,
+          de la mutuelle et de la situation personnelle de chacun. Pour un calcul précis, utilisez un simulateur
+          officiel (ex. service-public.fr).
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-dark text-light-emphasis py-3 mt-auto">
+    <div class="container text-center small">
+      &copy; <span id="year"></span> Outils
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
