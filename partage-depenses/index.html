@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Partage des dépenses &mdash; Outils</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">Outils</a>
+      <span class="navbar-text text-light-emphasis">Partage des dépenses</span>
+    </div>
+  </nav>
+
+  <main class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <h1 class="mb-4">Calculateur de partage des dépenses</h1>
+
+        <form id="split-form" class="row g-3" novalidate>
+          <div class="col-sm-6">
+            <label for="salary1" class="form-label">Salaire individu 1 (&euro;)</label>
+            <input type="number" class="form-control" id="salary1" min="0" step="10" value="2500" required>
+          </div>
+          <div class="col-sm-6">
+            <label for="salary2" class="form-label">Salaire individu 2 (&euro;)</label>
+            <input type="number" class="form-control" id="salary2" min="0" step="10" value="1800" required>
+          </div>
+          <div class="col-12">
+            <label for="expenses" class="form-label">Dépenses mensuelles communes (&euro;)</label>
+            <input type="number" class="form-control" id="expenses" min="0" step="10" value="1500" required>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">Calculer</button>
+          </div>
+        </form>
+
+        <div id="result" class="mt-4 d-none">
+          <div class="result-box p-4">
+            <div class="row text-center">
+              <div class="col-6 col-md-3 mb-3 mb-md-0">
+                <div class="text-body-secondary small">Revenu total</div>
+                <div class="fs-5 fw-semibold" id="total-income">&mdash;</div>
+              </div>
+              <div class="col-6 col-md-3 mb-3 mb-md-0">
+                <div class="text-body-secondary small">Dépenses communes</div>
+                <div class="fs-5 fw-semibold" id="total-expenses">&mdash;</div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="text-body-secondary small">Reste (foyer)</div>
+                <div class="fs-5 fw-semibold" id="total-rest">&mdash;</div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="text-body-secondary small">Reste individuel</div>
+                <div class="fs-5 fw-semibold" id="individual-rest">&mdash;</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-responsive mt-4">
+            <table class="table table-bordered align-middle text-center">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col">Détail du calcul</th>
+                  <th scope="col">Individu 1</th>
+                  <th scope="col">Individu 2</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row" class="text-start">Salaire</th>
+                  <td id="row-salary-1">&mdash;</td>
+                  <td id="row-salary-2">&mdash;</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="text-start">&minus; Reste individuel</th>
+                  <td id="row-individual-rest-1">&mdash;</td>
+                  <td id="row-individual-rest-2">&mdash;</td>
+                </tr>
+                <tr class="table-primary fw-semibold">
+                  <th scope="row" class="text-start">= Part à payer sur les dépenses communes</th>
+                  <td id="row-share-1">&mdash;</td>
+                  <td id="row-share-2">&mdash;</td>
+                </tr>
+                <tr class="text-body-secondary">
+                  <th scope="row" class="text-start">Reste après sa part (contrôle)</th>
+                  <td id="row-check-1">&mdash;</td>
+                  <td id="row-check-2">&mdash;</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p id="negative-note" class="text-body-secondary small mt-3 d-none">
+            Une part à payer négative signifie que cet individu gagne moins que le reste individuel visé :
+            l'autre personne doit alors couvrir toutes les dépenses communes et lui reverser la différence
+            pour équilibrer.
+          </p>
+        </div>
+
+        <p class="text-body-secondary small mt-4">
+          Répartition proportionnelle aux revenus : chaque personne paie sa part des dépenses communes de
+          façon à ce qu'il reste, une fois cette part payée, la même somme disponible pour chacun.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-dark text-light-emphasis py-3 mt-auto">
+    <div class="container text-center small">
+      &copy; <span id="year"></span> Outils
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
