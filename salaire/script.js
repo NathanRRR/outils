@@ -1,4 +1,5 @@
 const eurFormatter = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' });
+// Base légale française pour un temps plein 35h/semaine : 35 × 52 / 12 = 151,67h/mois.
 const LEGAL_HOURS_PER_MONTH = 151.67;
 
 document.getElementById('salary-form').addEventListener('submit', (event) => {
@@ -7,7 +8,7 @@ document.getElementById('salary-form').addEventListener('submit', (event) => {
   const amount = parseFloat(document.getElementById('amount').value);
   const period = document.getElementById('period').value;
   const monthsPerYear = parseInt(document.getElementById('months').value, 10);
-  const ratio = parseFloat(document.getElementById('status').value);
+  const ratio = parseFloat(document.getElementById('status').value); // ratio net/brut selon le statut choisi
   const taxRate = parseFloat(document.getElementById('tax-rate').value) || 0;
   const direction = document.querySelector('input[name="direction"]:checked').value;
 
@@ -15,8 +16,12 @@ document.getElementById('salary-form').addEventListener('submit', (event) => {
     return;
   }
 
+  // On ramène toujours le montant saisi à un équivalent mensuel, quelle que soit la période
+  // choisie (horaire, mensuel, annuel), pour pouvoir appliquer le même calcul ensuite.
   let monthlyAmount;
   if (period === 'year') {
+    // Le nombre de mois de salaire (12, 13, 14...) sert à repasser d'un montant annuel
+    // à son équivalent mensuel, pour les salariés payés sur plus de 12 mensualités.
     monthlyAmount = amount / monthsPerYear;
   } else if (period === 'hour') {
     monthlyAmount = amount * LEGAL_HOURS_PER_MONTH;
@@ -24,9 +29,10 @@ document.getElementById('salary-form').addEventListener('submit', (event) => {
     monthlyAmount = amount;
   }
 
+  // Conversion brut→net ou net→brut selon le sens choisi, via le ratio du statut.
   let resultMonthly;
   let resultLabel;
-  let netMonthly;
+  let netMonthly; // toujours la valeur "nette", peu importe le sens, pour calculer l'impôt ensuite
   if (direction === 'brut-to-net') {
     resultMonthly = monthlyAmount * ratio;
     resultLabel = 'Salaire net';
@@ -42,6 +48,7 @@ document.getElementById('salary-form').addEventListener('submit', (event) => {
   document.getElementById('result-month').textContent = eurFormatter.format(resultMonthly);
   document.getElementById('result-year').textContent = eurFormatter.format(resultMonthly * monthsPerYear);
 
+  // Le bloc "net après impôt" n'a de sens que si un taux de prélèvement a été renseigné.
   const afterTaxSection = document.getElementById('result-after-tax');
   if (taxRate > 0) {
     const netAfterTaxMonthly = netMonthly * (1 - taxRate / 100);

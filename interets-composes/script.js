@@ -12,10 +12,16 @@ document.getElementById('compound-form').addEventListener('submit', (event) => {
     return;
   }
 
+  // Capitalisation mensuelle : le taux annuel est réparti sur 12 mois.
   const monthlyRate = annualRate / 100 / 12;
   const numMonths = years * 12;
 
+  // Croissance du capital initial seul : intérêts composés classiques (capital × (1+r)^n).
   const principalGrowth = principal * Math.pow(1 + monthlyRate, numMonths);
+
+  // Croissance des versements mensuels : formule de la valeur acquise d'une suite de
+  // versements constants (annuité), chaque versement capitalisant depuis son propre mois.
+  // Cas particulier à 0 % : pas de division par zéro, on additionne juste les versements.
   let contributionGrowth;
   if (monthlyRate === 0) {
     contributionGrowth = contribution * numMonths;
