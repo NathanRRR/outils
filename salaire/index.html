@@ -43,16 +43,31 @@
             <select class="form-select" id="period">
               <option value="month" selected>Mensuel</option>
               <option value="year">Annuel</option>
+              <option value="hour">Horaire</option>
             </select>
           </div>
 
-          <div class="col-12">
+          <div class="col-sm-6">
+            <label for="months" class="form-label">Nombre de mois de salaire</label>
+            <select class="form-select" id="months">
+              <option value="12" selected>12 mois</option>
+              <option value="13">13 mois</option>
+              <option value="14">14 mois</option>
+            </select>
+          </div>
+
+          <div class="col-sm-6">
             <label for="status" class="form-label">Statut</label>
             <select class="form-select" id="status">
               <option value="0.78" selected>Non-cadre (secteur privé)</option>
               <option value="0.75">Cadre (secteur privé)</option>
               <option value="0.85">Fonction publique</option>
             </select>
+          </div>
+
+          <div class="col-sm-6">
+            <label for="tax-rate" class="form-label">Taux de prélèvement à la source (%)</label>
+            <input type="number" class="form-control" id="tax-rate" min="0" max="100" step="0.1" value="0">
           </div>
 
           <div class="col-12">
@@ -73,12 +88,24 @@
               <div class="text-body-secondary small">par an</div>
             </div>
           </div>
+          <div id="result-after-tax" class="row text-center mt-3 pt-3 border-top d-none">
+            <div class="col-6">
+              <div class="text-body-secondary small">Net après impôt</div>
+              <div class="fs-5 fw-semibold" id="result-month-after-tax">&mdash;</div>
+              <div class="text-body-secondary small">par mois</div>
+            </div>
+            <div class="col-6">
+              <div class="text-body-secondary small">Net après impôt</div>
+              <div class="fs-5 fw-semibold" id="result-year-after-tax">&mdash;</div>
+              <div class="text-body-secondary small">par an</div>
+            </div>
+          </div>
         </div>
 
         <p class="text-body-secondary small mt-4">
           Estimation approximative à titre indicatif. Le taux de charges réel dépend de la convention collective,
-          de la mutuelle et de la situation personnelle de chacun. Pour un calcul précis, utilisez un simulateur
-          officiel (ex. service-public.fr).
+          de la mutuelle et de la situation personnelle de chacun. Le montant horaire suppose une base légale de
+          151,67h/mois (35h hebdomadaires). Pour un calcul précis, utilisez un simulateur officiel (ex. service-public.fr).
         </p>
       </div>
     </div>

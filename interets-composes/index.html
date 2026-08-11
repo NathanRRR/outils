@@ -24,15 +24,15 @@
         <form id="compound-form" class="row g-3" novalidate>
           <div class="col-sm-6">
             <label for="principal" class="form-label">Capital initial (&euro;)</label>
-            <input type="number" class="form-control" id="principal" min="0" step="0.01" value="10000" required>
+            <input type="number" class="form-control" id="principal" min="0" step="10" value="10000" required>
           </div>
           <div class="col-sm-6">
             <label for="contribution" class="form-label">Versement mensuel (&euro;)</label>
-            <input type="number" class="form-control" id="contribution" min="0" step="0.01" value="100">
+            <input type="number" class="form-control" id="contribution" min="0" step="10" value="100">
           </div>
           <div class="col-sm-6">
             <label for="rate" class="form-label">Taux annuel (%)</label>
-            <input type="number" class="form-control" id="rate" min="0" step="0.01" value="5" required>
+            <input type="number" class="form-control" id="rate" min="0" step="0.1" value="5" required>
           </div>
           <div class="col-sm-6">
             <label for="years" class="form-label">Durée (années)</label>
