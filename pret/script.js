@@ -30,8 +30,14 @@ document.getElementById('loan-form').addEventListener('submit', (event) => {
   const totalPaid = monthlyPayment * numPayments;
   const totalInterest = totalPaid - amount;
 
+  // Taux d'endettement maximum recommandé par le HCSF : la mensualité ne doit pas
+  // dépasser 35 % des revenus nets. On en déduit le salaire net mensuel minimum requis.
+  const MAX_DEBT_RATIO = 0.35;
+  const minIncome = monthlyPayment / MAX_DEBT_RATIO;
+
   document.getElementById('monthly-payment').textContent = eurFormatter.format(monthlyPayment);
   document.getElementById('total-interest').textContent = eurFormatter.format(totalInterest);
   document.getElementById('total-paid').textContent = eurFormatter.format(totalPaid);
+  document.getElementById('min-income').textContent = eurFormatter.format(minIncome);
   document.getElementById('result').classList.remove('d-none');
 });
