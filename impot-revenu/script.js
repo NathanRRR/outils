@@ -1,13 +1,14 @@
 const eurFormatter = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' });
 const pctFormatter = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 1 });
 
-// Barème progressif 2024 (revenus 2023), par part fiscale.
+// Barème progressif 2026 (revenus 2025), par part fiscale. Tranches indexées de 0,9 %
+// par rapport au barème 2025 (loi de finances pour 2026, loi n° 2026-103 du 19.2.2026).
 // "max" = plafond de la tranche, "rate" = taux appliqué à la portion de revenu dans cette tranche.
 const BRACKETS = [
-  { max: 11294, rate: 0 },
-  { max: 28797, rate: 0.11 },
-  { max: 82341, rate: 0.30 },
-  { max: 177106, rate: 0.41 },
+  { max: 11600, rate: 0 },
+  { max: 29579, rate: 0.11 },
+  { max: 84577, rate: 0.30 },
+  { max: 181917, rate: 0.41 },
   { max: Infinity, rate: 0.45 },
 ];
 
